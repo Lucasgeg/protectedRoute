@@ -1,6 +1,9 @@
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
+import { AuthProvider } from "./components/AuthContext";
+import { About } from "./pages/About";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -15,8 +18,20 @@ export const Router = () => {
     },
     {
       path: "/profile",
-      element: <Profile />,
+      element: (
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/about",
+      element: <About />,
     },
   ]);
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider isSignedIn={false}>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 };

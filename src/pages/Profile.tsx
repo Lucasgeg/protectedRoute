@@ -1,3 +1,10 @@
+import { Navbar } from "../components/Navbar";
+
 export const Profile = () => {
-  return <div>Profile</div>;
+  return (
+    <div>
+      <Navbar />
+      <div>Profile</div>
+    </div>
+  );
 };
